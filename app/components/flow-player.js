@@ -1,0 +1,1 @@
+export { default } from 'ember-flowplayer/components/flow-player';
