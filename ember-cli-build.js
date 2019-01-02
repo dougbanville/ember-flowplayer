@@ -13,6 +13,13 @@ module.exports = function(defaults) {
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
+  
+ app.import('vendor/flowplayer.min.js');
+ app.import('vendor/flowplayer.hlsjs.light.min.js')
+ app.import('vendor/flowplayer.audio.min.js');
+ app.import('vendor/skin.css');
+ app.import('vendor/flowplayer.audio.css');
+
 
   return app.toTree();
 };

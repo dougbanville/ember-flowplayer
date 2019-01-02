@@ -1,32 +1,53 @@
 import Component from '@ember/component';
 import layout from '../templates/components/ember-flowplayer';
-import {flowplayer} from 'flowplayer';
+import { inject as service } from '@ember/service';
+import { or, readOnly, equal, reads, alias } from '@ember/object/computed';
 
 export default Component.extend({
   layout,
 
+  emberFlowplayer: service(),
+
+  source: "https://cdn.rte.ie/live/ieradio1/playlist.m3u8",
+
+  type: "application/x-mpegurl",
+
+  live: true,
+
   didInsertElement(){
-    console.log("hi there shit for brains");
     //alert("YO")
-    let icecastSources = [
+
+
+    let audio = [
       // native HLS support accepts icecast source
-      { type: "audio/x-mpegurl", engine: "html5",
-        src: "http://live-aacplus-64.kexp.org/kexp64.aac" },
-      { type: "audio/mp4; codecs=mp4a.40.5",
-        src: "http://live-aacplus-64.kexp.org/kexp64.aac" },
-      { type: "video/flash",
-        src: "http://live-aacplus-64.kexp.org/kexp64.aac?type=.flv" }
+      { type: this.get("type"),
+        src: this.get("source")}
     ];
-    console.log(icecastSources);
     let container = document.getElementById("ember-flowplayer");
-    flowplayer(container, {
-      live: true,
+
+
+    let fp = flowplayer(container, {
+      live: this.get("live"),
       splash: true,
       audioOnly: true,
       clip: {
-        sources: icecastSources
+        sources: audio
       }
+    }).on("ready error", function (e) {
+
+    }).on("progress.android", function (e) {
+      // *if* Android plays it, it botches up duration initially, overwrite
+    }).on("resume", _=>{
+      this.get("emberFlowplayer").setStatus("playing");
+    }).on("pause",_=>{
+      //this.get("emberFlowplayer").setStatus("paused");
+    }).on("progress",(e,api)=>{
+      console.log(api.video.time);
     })
+
+    this.get("emberFlowplayer").setPlayer(fp);
+
+
 
   }
 });
