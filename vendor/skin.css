@@ -455,7 +455,7 @@
   content: "\e312"; }
 
 .flowplayer.no-svg .fp-ui .fp-header, .flowplayer.no-svg .fp-ui .fp-controls {
-  background-color: #333; }
+  background-color: transparent; }
 
 .flowplayer.no-svg .fp-ui .fp-play.fp-visible {
   background-color: #ccc;
@@ -1032,3 +1032,28 @@
   overflow: hidden !important;
   position: absolute; }
 
+  .fp-icon, .fp-playbtn, .fp-elapsed, .fp-duration, .fp-remaining, .fp-volume, .fp-icon .fp-volumebtn,.fp-volumebar .fp-bar-slider {
+      display:none!important;
+  }
+  .flowplayer.fp-playful .fp-controls{
+    background:transparent;
+    margin: 0 0;
+  }
+  .flowplayer .fp-controls > * {
+    margin: 0 0;
+}
+.flowplayer.fp-fat .fp-bar, .flowplayer.fp-playful .fp-bar, .flowplayer.fp-fat .fp-bar-slider, .flowplayer.fp-playful .fp-bar-slider {
+  height: 4px;
+}
+.container {
+  display: flex; /* or inline-flex */
+}
+
+.flowplayer .fp-color {
+  background-color: #373484;
+}
+.flowplayer.is-ready .fp-player {
+}
+.fp-controls{
+  background-color:transparent!important;
+}

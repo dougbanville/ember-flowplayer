@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/ember-flowplayer';
 import { inject as service } from '@ember/service';
 import { or, readOnly, equal, reads, alias } from '@ember/object/computed';
+import $ from 'jquery';
 
 export default Component.extend({
   layout,
@@ -14,16 +15,27 @@ export default Component.extend({
 
   live: true,
 
+  isBuffering: false,
+
   didInsertElement(){
     //alert("YO")
 
-
+    this.$(".fp-controls").attr('style', 'text-align: center');
     let audio = [
       // native HLS support accepts icecast source
       { type: this.get("type"),
         src: this.get("source")}
     ];
+    this.set("audio",audio);
+
+    console.log(this.get("audio"))
     let container = document.getElementById("ember-flowplayer");
+
+
+    $(".animated").addClass("radio1");
+    
+    //progress.classList.add("mystyle");
+
 
 
     let fp = flowplayer(container, {
@@ -40,14 +52,22 @@ export default Component.extend({
     }).on("resume", _=>{
       this.get("emberFlowplayer").setStatus("playing");
     }).on("pause",_=>{
-      //this.get("emberFlowplayer").setStatus("paused");
+      this.get("emberFlowplayer").setStatus("paused");
     }).on("progress",(e,api)=>{
-      console.log(api.video.time);
+      this.get("emberFlowplayer").setTime(api.video.time);
+    }).on("ready",()=>{
+      $(".fp-progress").addClass("radio1");
     })
 
     this.get("emberFlowplayer").setPlayer(fp);
 
+    return fp;
 
+  },
 
+  actions:{
+    togglePlayer(){
+        this.get("emberFlowplayer").player.toggle();
+    }
   }
 });
