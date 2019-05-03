@@ -7,6 +7,9 @@ export default Controller.extend({
   actions: {
     toggle() {
       this.emberFlowplayer.player.toggle();
+    },
+    inputChange() {
+      this.get("emberFlowplayer").setTime(0);
     }
   }
 });
