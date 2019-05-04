@@ -56,7 +56,9 @@ export default Component.extend({
         this.get("emberFlowplayer").setStatus("paused");
       })
       .on("progress", (e, api) => {
-        this.get("emberFlowplayer").setTime(api.video.time);
+        if (!this.emberFlowplayer.sliding) {
+          this.get("emberFlowplayer").setTime(api.video.time);
+        }
       })
       .on("ready", (e, api) => {
         console.log(api.video.duration);
