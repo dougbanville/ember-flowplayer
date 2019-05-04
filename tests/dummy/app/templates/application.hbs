@@ -1,6 +1,8 @@
 <h2 id="title">Welcome to Ember! {{ emberFlowplayer.player.live }} {{ emberFlowplayer.isPlaying }}
-    {{emberFlowplayer.duration}} {{emberFlowplayer.currentTime}}</h2>
-<PlayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}} />
+    {{emberFlowplayer.duration}} {{emberFlowplayer.currentTime}} {{emberFlowplayer.duration}}</h2>
+{{#if emberFlowplayer.duration}}
+    <PlayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}} />
+{{/if}}
 <EmberFlowplayer
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
     @live=0 />
