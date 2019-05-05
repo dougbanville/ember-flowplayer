@@ -4,12 +4,18 @@ import { inject as service } from "@ember/service";
 export default Controller.extend({
   emberFlowplayer: service(),
 
+  muted: false,
+
   actions: {
     toggle() {
       this.emberFlowplayer.player.toggle();
     },
     inputChange() {
-      this.get("emberFlowplayer").setTime(0);
+      this.emberFlowplayer.setTime(0);
+    },
+    mute() {
+      this.toggleProperty("muted");
+      this.emberFlowplayer.player.mute(this.muted);
     }
   }
 });
