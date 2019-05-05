@@ -18,6 +18,8 @@ export default Component.extend({
       .create(rangeSlider, {
         start: [this.value],
         value: [this.value],
+        connect: [true, false],
+        behaviour: "tap-drag",
         range: {
           min: [parseInt(this.min)],
           max: [this.max]
@@ -35,12 +37,10 @@ export default Component.extend({
       this.set("sliding", true);
     });
     rangeSlider.noUiSlider.on("end", values => {
-      console.log(values);
       this.emberFlowplayer.player.seek(values);
       this.set("sliding", false);
     });
     rangeSlider.noUiSlider.on("change", values => {
-      console.log(values);
       this.emberFlowplayer.player.seek(values);
       this.set("sliding", false);
     });
