@@ -1,3 +1,6 @@
+body {
+  background: black;
+}
 /*! nouislider - 13.1.5 - 4/24/2019 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.
@@ -69,8 +72,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   position: absolute;
 }
 .noUi-touch-area {
-  height: 100%;
-  width: 100%;
+  height: 30px;
+  width: 30px;
 }
 .noUi-state-tap .noUi-connect,
 .noUi-state-tap .noUi-origin {
@@ -83,13 +86,13 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 /* Slider size and handle placement;
   */
 .noUi-horizontal {
-  height: 18px;
+  height: 4px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 34px;
-  height: 28px;
+  width: 10px;
+  height: 10px;
   left: -17px;
-  top: -6px;
+  top: -3px;
 }
 .noUi-vertical {
   width: 18px;
@@ -101,7 +104,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   top: -17px;
 }
 html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
-  right: -17px;
+  right: 0px;
   left: auto;
 }
 /* Styling;
@@ -110,14 +113,13 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .noUi-target {
   background: #fafafa;
   border-radius: 4px;
-  border: 1px solid #d3d3d3;
   box-shadow: inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbb;
 }
 .noUi-connects {
   border-radius: 3px;
 }
 .noUi-connect {
-  background: #3fb8af;
+  background: #57a9d3;
 }
 /* Handles and cursors;
   */
@@ -128,8 +130,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   cursor: ns-resize;
 }
 .noUi-handle {
-  border: 1px solid #d9d9d9;
-  border-radius: 3px;
+  border-radius: 50%;
   background: #fff;
   cursor: default;
   box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;
@@ -142,7 +143,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .noUi-handle:before,
 .noUi-handle:after {
   content: "";
-  display: block;
+  display: none;
   position: absolute;
   height: 14px;
   width: 1px;
@@ -290,4 +291,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   transform: translate(0, -50%);
   top: 50%;
   right: 120%;
+}
+.c-1-color {
+  background: red;
 }
