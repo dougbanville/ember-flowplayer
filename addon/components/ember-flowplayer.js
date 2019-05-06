@@ -103,6 +103,8 @@ export default Component.extend(EKMixin, {
         }
       })
       .on("ready", (e, api) => {
+        console.log("aye aye sir");
+        this.emberFlowplayer.change(false);
         this.get("emberFlowplayer").setDuration(api.video.duration);
         this.set("ready", true);
         $(".fp-progress").addClass(this.get("customClass"));

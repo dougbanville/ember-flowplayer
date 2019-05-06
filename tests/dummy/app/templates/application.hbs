@@ -35,10 +35,13 @@
                         <h4 class="hoverUl">
                             Mooney Goes Wild</h4>
                     </a>
-
-                    {{#if emberFlowplayer.duration}}
-                        <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0
-                            @value={{emberFlowplayer.currentTime}} />
+                    {{#if emberFlowplayer.changeSrc}}
+                        Loading
+                    {{else}}
+                        {{#if emberFlowplayer.duration}}
+                            <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0
+                                @value={{emberFlowplayer.currentTime}} />
+                        {{/if}}
                     {{/if}}
 
 
@@ -70,4 +73,6 @@
         </div>
     </audio-player>
 </div>
+<EmberFlowplayerChangeSource
+    @source="https://cdn.rasset.ie/manifest/audio/2019/0506/20190506_rteradio1-colmoregan_cl11033668_11035945_261_/manifest.m3u8" />
 {{outlet}}

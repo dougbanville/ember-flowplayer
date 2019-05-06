@@ -8,6 +8,8 @@ export default Service.extend({
 
   currentTime: 0,
 
+  changeSrc: false,
+
   setPlayer(fp) {
     this.set("player", fp);
   },
@@ -31,5 +33,8 @@ export default Service.extend({
   },
   setSliderState(sliding) {
     this.set("sliding", sliding);
+  },
+  change(s) {
+    this.set("changeSrc", s);
   }
 });
