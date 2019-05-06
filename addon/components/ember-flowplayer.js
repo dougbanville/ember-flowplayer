@@ -25,6 +25,22 @@ export default Component.extend(EKMixin, {
 
   muted: false,
 
+  errorCodes: function() {
+    let codes = {
+      1: "Loading Aborted",
+      2: "Network error",
+      3: "Audio not properly encoded",
+      4: "file not found",
+      5: "Unsupported video",
+      6: "Skin not found",
+      7: "SWF file not found",
+      8: "Subtitles not found",
+      9: "Invalid RTMP URL",
+      10: "Unsupported video format"
+    };
+    return codes;
+  },
+
   init() {
     this._super(...arguments);
     this.set("keyboardActivated", true);
@@ -90,6 +106,11 @@ export default Component.extend(EKMixin, {
         this.get("emberFlowplayer").setDuration(api.video.duration);
         this.set("ready", true);
         $(".fp-progress").addClass(this.get("customClass"));
+      })
+      .on("error", (e, api, error) => {
+        this.set("error", true);
+        let errorCodes = this.errorCodes();
+        this.set("errorMessage", errorCodes[error.code]);
       });
 
     this.get("emberFlowplayer").setPlayer(fp);
