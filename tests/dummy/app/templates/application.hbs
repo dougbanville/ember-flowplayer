@@ -1,12 +1,99 @@
+{{! template-lint-disable }}
 <h2 id="title">Welcome to Ember! {{ emberFlowplayer.player.live }} {{ emberFlowplayer.isPlaying }}
     {{emberFlowplayer.duration}} {{emberFlowplayer.currentTime}} {{emberFlowplayer.duration}}</h2>
 {{#if emberFlowplayer.duration}}
-    <PlayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}}
-        style="margin-bottom: 100px; height:100px;" />
+
 {{/if}}
 <EmberFlowplayer
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
     @live=0 />
 
+
+<button {{action "toggle"}}>Play</button>
+
 <button {{action "mute"}}>Mute</button>
+
+
+<div class="small-3 medium-2 cell">
+    <button tabindex="1" id="play" class="button transparent playButton radio1" label="Play" data-ember-action=""
+        data-ember-action-112="112">
+        <i class="icon-RP-Webfont_Play"></i>
+    </button>
+</div>
+
+
+
+<div class="grid-container rte-radioplayer">
+    <audio-player aria-label="Audio Player" id="ember89" class="ember-view">
+        <!---->
+        <div class="rte-radioplayer">
+            <div class="grid-x">
+                <div class="small-3 medium-2 cell">
+                    <button tabindex="1" id="play" class="button transparent playButton radio1" label="Play"
+                        {{action "toggle"}}>
+                        <i class="icon-RP-Webfont_Play"></i>
+                    </button>
+                </div>
+                <div class="small-7 medium-8 cell">
+                    <a href="#/radio1/11033283" id="ember859" class="active ember-view">
+                        <h4 class="hoverUl">
+                            Mooney Goes Wild</h4>
+                    </a>
+
+                    {{#if emberFlowplayer.duration}}
+                        <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0
+                            @value={{emberFlowplayer.currentTime}} />
+                    {{/if}}
+
+
+
+                    <div class="duration_information">
+                        <span id="ember843" class="ember-view">{{emberFlowplayer.player.currentTime}}</span>
+                        <span id="ember861" class="ember-view float-right">{{emberFlowplayer.duration}}</span>
+                    </div>
+
+                </div>
+                <div class="small-2 medium-1  cell volume-cell">
+                    <button class="mute float-right transparent" {{action "mute"}}>
+                        <i class="icon-RP-Webfont_Volume"></i>
+                    </button>
+                </div>
+                <div class="medium-1 hide-for-small-only cell">
+                    <div class="volume">
+                        <div id="ember846" class="ui-slider mood-radio1 singular fill ember-view">
+                            <div class="slider slider-horizontal" id="">
+                                <div class="slider-track">
+                                    <div class="slider-track-low" style="left: 0px; width: 0%;"></div>
+                                    <div class="slider-selection" style="left: 0%; width: 100%;"></div>
+                                    <div class="slider-track-high" style="right: 0px; width: 0%;"></div>
+                                    <div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0"
+                                        aria-valuemax="100" aria-valuenow="100" tabindex="0" style="left: 100%;"></div>
+                                    <div class="slider-handle max-slider-handle round hide" role="slider"
+                                        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"
+                                        style="left: 0%;"></div>
+                                </div>
+                                <div class="tooltip tooltip-main top hide" role="presentation"
+                                    style="left: 100%; margin-left: -21.5px;">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner">100</div>
+                                </div>
+                                <div class="tooltip tooltip-min top hide" role="presentation">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner"></div>
+                                </div>
+                                <div class="tooltip tooltip-max bottom hide" role="presentation" style="top: 18px;">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner"></div>
+                                </div>
+                            </div><input id="slider-value-ember846" class="slider-value" type="text" data-value="100"
+                                value="100" style="display: none;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </audio-player>
+</div>
 {{outlet}}

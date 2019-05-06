@@ -1,11 +1,14 @@
 import Component from "@ember/component";
-import layout from "../templates/components/player-range";
+import layout from "../templates/components/ember-flowplayer-range";
 import { inject as service } from "@ember/service";
-import { debounce } from "@ember/runloop";
 import noUiSlider from "nouislider";
 
 export default Component.extend({
   layout,
+
+  tagName: "div",
+
+  elementId: "ember-flowplayer-player-range",
 
   keyDown() {
     alert("DoubleClickableComponent was clicked!");
@@ -16,19 +19,8 @@ export default Component.extend({
   sliderValueB: 3,
 
   didInsertElement() {
-    //listen for arrow clicks so we seek backa and forth
-    /*
-    document.addEventListener("keydown", event => {
-      if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-        this.emberFlowplayer.player.seek(false);
-      } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-        // Open Menu...
-        this.emberFlowplayer.player.seek(true);
-      }
-    });
-    */
+    var rangeSlider = document.getElementById("ember-flowplayer-player-range");
 
-    var rangeSlider = document.getElementById("slider");
     let min = parseInt(this.min);
     noUiSlider
       .create(rangeSlider, {

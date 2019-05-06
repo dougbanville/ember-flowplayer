@@ -1,10 +1,12 @@
 import Component from "@ember/component";
 import layout from "../templates/components/ember-flowplayer";
 import { inject as service } from "@ember/service";
-import { or, readOnly, equal, reads, alias } from "@ember/object/computed";
 import $ from "jquery";
+import { EKMixin } from "ember-keyboard";
+import { keyUp, keyDown } from "ember-keyboard";
+import { on } from "@ember/object/evented";
 
-export default Component.extend({
+export default Component.extend(EKMixin, {
   layout,
 
   emberFlowplayer: service(),
@@ -20,6 +22,30 @@ export default Component.extend({
   customClass: "radio1",
 
   isPlaying: false,
+
+  muted: false,
+
+  init() {
+    this._super(...arguments);
+    this.set("keyboardActivated", true);
+  },
+
+  keyboardToggle: on(keyDown("Space"), function() {
+    this.get("emberFlowplayer").player.toggle();
+  }),
+
+  keyboardSeekForward: on(keyDown("ArrowRight"), keyDown("ArrowUp"), function() {
+    this.emberFlowplayer.player.seek(true);
+  }),
+
+  keyboardSeekBack: on(keyDown("ArrowLeft"), keyDown("ArrowDown"), function() {
+    this.emberFlowplayer.player.seek(false);
+  }),
+
+  keyboardMute: on(keyUp("KeyM"), function() {
+    this.toggleProperty("muted");
+    this.emberFlowplayer.player.mute(this.muted);
+  }),
 
   didInsertElement() {
     //alert("YO")
@@ -61,8 +87,8 @@ export default Component.extend({
         }
       })
       .on("ready", (e, api) => {
-        console.log(api.video.duration);
         this.get("emberFlowplayer").setDuration(api.video.duration);
+        this.set("ready", true);
         $(".fp-progress").addClass(this.get("customClass"));
       });
 
