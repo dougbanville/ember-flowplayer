@@ -15,7 +15,7 @@ export default Component.extend(EKMixin, {
 
   type: "application/x-mpegurl",
 
-  live: true,
+  live: false,
 
   isBuffering: false,
 

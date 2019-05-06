@@ -7,7 +7,7 @@ export default Controller.extend({
   muted: false,
 
   actions: {
-    toggle() {
+    togglePlayer() {
       this.emberFlowplayer.player.toggle();
     },
     inputChange() {

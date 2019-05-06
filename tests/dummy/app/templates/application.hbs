@@ -1,38 +1,39 @@
 {{! template-lint-disable }}
-<h2 id="title">Welcome to Ember! {{ emberFlowplayer.player.live }} {{ emberFlowplayer.isPlaying }}
-    {{emberFlowplayer.duration}} {{emberFlowplayer.currentTime}} {{emberFlowplayer.duration}}</h2>
+<h2>Ember Flowplayer Audio</h2>
+
+<ul>
+    <li>isLive: {{ emberFlowplayer.player.live }}</li>
+    <li>isPlaying: {{ emberFlowplayer.isPlaying }}</li>
+    <li>Audio duration: {{emberFlowplayer.duration}}</li>
+    <li>Audio Current Time: {{emberFlowplayer.currentTime}}</li>
+    <li>Audio Volume: {{emberFlowplayer.player.volumeLevel}}</li>
+
+</ul>
+
+table
 {{#if emberFlowplayer.duration}}
 
 {{/if}}
 <EmberFlowplayer
-    @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
-    @live=0 />
-
-
-<button {{action "toggle"}}>Play</button>
-
-<button {{action "mute"}}>Mute</button>
-
-
-<div class="small-3 medium-2 cell">
-    <button tabindex="1" id="play" class="button transparent playButton radio1" label="Play" data-ember-action=""
-        data-ember-action-112="112">
-        <i class="icon-RP-Webfont_Play"></i>
-    </button>
-</div>
-
-
-
+    @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8" />
 <div class="grid-container rte-radioplayer">
     <audio-player aria-label="Audio Player" id="ember89" class="ember-view">
-        <!---->
         <div class="rte-radioplayer">
             <div class="grid-x">
                 <div class="small-3 medium-2 cell">
-                    <button tabindex="1" id="play" class="button transparent playButton radio1" label="Play"
-                        {{action "toggle"}}>
-                        <i class="icon-RP-Webfont_Play"></i>
-                    </button>
+                    {{#if emberFlowplayer.isPlaying}}
+                        <button tabindex="1" id="pause"
+                            class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
+                            {{action "togglePlayer" "pause"}} label="Pause">
+                            <i class="icon-RP-Webfont_Pause"></i>
+                        </button>
+                    {{else}}
+                        <button tabindex="1" id="play"
+                            class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
+                            {{action "togglePlayer" "play"}} label="Play">
+                            <i class="icon-RP-Webfont_Play"></i>
+                        </button>
+                    {{/if}}
                 </div>
                 <div class="small-7 medium-8 cell">
                     <a href="#/radio1/11033283" id="ember859" class="active ember-view">
@@ -48,8 +49,13 @@
 
 
                     <div class="duration_information">
-                        <span id="ember843" class="ember-view">{{emberFlowplayer.player.currentTime}}</span>
-                        <span id="ember861" class="ember-view float-right">{{emberFlowplayer.duration}}</span>
+                        <NumeralFormat @duration={{emberFlowplayer.currentTime}} />
+                        {{#if player.isLive}}
+                            <NumeralFormat @duration={{ player.nowPlaying.lastObject.duration }} class="float-right" />
+                            {{timeLeft}}
+                        {{else}}
+                            <NumeralFormat @duration={{emberFlowplayer.duration}} class="float-right" />
+                        {{/if}}
                     </div>
 
                 </div>
