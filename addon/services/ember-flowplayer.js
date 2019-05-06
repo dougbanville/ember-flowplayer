@@ -20,9 +20,8 @@ export default Service.extend({
       this.set("isPlaying", false);
     }
   },
-
-  play() {
-    //flowplayer.play();
+  setVolume(vol) {
+    flowplayer.volume(0.5);
   },
   setTime(time) {
     this.set("currentTime", time);

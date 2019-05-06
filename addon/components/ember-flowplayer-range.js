@@ -10,33 +10,22 @@ export default Component.extend({
 
   elementId: "ember-flowplayer-player-range",
 
-  keyDown() {
-    alert("DoubleClickableComponent was clicked!");
-  },
-
   emberFlowplayer: service(),
-
-  sliderValueB: 3,
 
   didInsertElement() {
     var rangeSlider = document.getElementById("ember-flowplayer-player-range");
 
-    let min = parseInt(this.min);
-    noUiSlider
-      .create(rangeSlider, {
-        start: [this.value],
-        value: [this.value],
-        connect: [true, false],
-        behaviour: "tap-drag",
-        keyboardSupport: false,
-        range: {
-          min: [parseInt(this.min)],
-          max: [this.max]
-        }
-      })
-      .on("slide", () => {
-        this.set("sliding", true);
-      });
+    noUiSlider.create(rangeSlider, {
+      start: [this.value],
+      value: [this.value],
+      connect: [true, false],
+      behaviour: "tap-drag",
+      keyboardSupport: false,
+      range: {
+        min: [parseInt(this.min)],
+        max: [this.max]
+      }
+    });
     this.emberFlowplayer.player.on("progress", (e, api) => {
       if (!this.sliding) {
         rangeSlider.noUiSlider.set(api.video.time);
@@ -61,22 +50,10 @@ export default Component.extend({
         this.emberFlowplayer.setSliderState(true);
       }
       this.set("value", event.target.value);
-      //debounce(this.myFlowplayer.setSliderState(true));
-      //debounce(this.set("value", event.target.value));
     },
     select(event) {
-      //this.set("value", event.target.value);
       this.emberFlowplayer.player.seek(event.target.value);
       this.emberFlowplayer.setSliderState(false);
-    },
-    focusOut() {
-      console.log("DON");
-    },
-    sliderMovedExplicit(val) {
-      this.set("sliderValueB", val);
-    },
-    mobTouch() {
-      alert("oi");
     }
   }
 });

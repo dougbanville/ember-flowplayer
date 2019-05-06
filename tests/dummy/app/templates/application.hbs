@@ -9,11 +9,6 @@
     <li>Audio Volume: {{emberFlowplayer.player.volumeLevel}}</li>
 
 </ul>
-
-table
-{{#if emberFlowplayer.duration}}
-
-{{/if}}
 <EmberFlowplayer
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8" />
 <div class="grid-container rte-radioplayer">
@@ -66,34 +61,7 @@ table
                 </div>
                 <div class="medium-1 hide-for-small-only cell">
                     <div class="volume">
-                        <div id="ember846" class="ui-slider mood-radio1 singular fill ember-view">
-                            <div class="slider slider-horizontal" id="">
-                                <div class="slider-track">
-                                    <div class="slider-track-low" style="left: 0px; width: 0%;"></div>
-                                    <div class="slider-selection" style="left: 0%; width: 100%;"></div>
-                                    <div class="slider-track-high" style="right: 0px; width: 0%;"></div>
-                                    <div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0"
-                                        aria-valuemax="100" aria-valuenow="100" tabindex="0" style="left: 100%;"></div>
-                                    <div class="slider-handle max-slider-handle round hide" role="slider"
-                                        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"
-                                        style="left: 0%;"></div>
-                                </div>
-                                <div class="tooltip tooltip-main top hide" role="presentation"
-                                    style="left: 100%; margin-left: -21.5px;">
-                                    <div class="tooltip-arrow"></div>
-                                    <div class="tooltip-inner">100</div>
-                                </div>
-                                <div class="tooltip tooltip-min top hide" role="presentation">
-                                    <div class="tooltip-arrow"></div>
-                                    <div class="tooltip-inner"></div>
-                                </div>
-                                <div class="tooltip tooltip-max bottom hide" role="presentation" style="top: 18px;">
-                                    <div class="tooltip-arrow"></div>
-                                    <div class="tooltip-inner"></div>
-                                </div>
-                            </div><input id="slider-value-ember846" class="slider-value" type="text" data-value="100"
-                                value="100" style="display: none;">
-                        </div>
+                        <EmberFlowplayerVolumerange @value=1 />
                     </div>
 
                 </div>
