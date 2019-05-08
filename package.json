@@ -27,6 +27,7 @@
     "nouislider": "^13.1.5",
     "ember-keyboard": "^4.0.0",
     "rangeslider.js": "^2.3.2",
+    "ember-auto-import": "^1.2.19",
     "numeral": "^2.0.6"
   },
   "devDependencies": {
@@ -34,7 +35,6 @@
     "broccoli-asset-rev": "^2.7.0",
     "broccoli-clean-css": "^1.1.0",
     "ember-a11y-testing": "^0.5.7",
-    "ember-auto-import": "^1.2.19",
     "ember-cli": "~3.6.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.3",
