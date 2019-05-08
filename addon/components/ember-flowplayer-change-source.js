@@ -9,10 +9,10 @@ export default Component.extend({
   type: "application/x-mpegurl",
 
   actions: {
-    play(url) {
+    play(live) {
       this.emberFlowplayer.change(true);
-      let audio = [{ type: this.get("type"), src: this.get("source") }];
-
+      let audio = [{ type: this.type, src: this.source }];
+      this.emberFlowplayer.setLive(live);
       this.emberFlowplayer.player
         .load({
           sources: audio

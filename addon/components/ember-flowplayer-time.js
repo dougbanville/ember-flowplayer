@@ -1,5 +1,5 @@
 import Component from "@ember/component";
-import layout from "../templates/components/numeral-format";
+import layout from "../templates/components/ember-flowplayer-time";
 import numeral from "numeral";
 
 export default Component.extend({

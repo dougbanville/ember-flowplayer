@@ -10,6 +10,11 @@ export default Service.extend({
 
   changeSrc: false,
 
+  setLive(live) {
+    console.log(`Setting live to ${live}`);
+    this.set("isLive", live);
+  },
+
   setPlayer(fp) {
     this.set("player", fp);
   },

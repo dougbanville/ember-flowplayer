@@ -1,0 +1,1 @@
+export { default } from 'ember-flowplayer/components/ember-flowplayer-time';

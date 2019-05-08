@@ -15,7 +15,7 @@ export default Component.extend(EKMixin, {
 
   type: "application/x-mpegurl",
 
-  live: false,
+  live: 0,
 
   isBuffering: false,
 
@@ -50,9 +50,13 @@ export default Component.extend(EKMixin, {
     this.get("emberFlowplayer").player.toggle();
   }),
 
-  keyboardSeekForward: on(keyDown("ArrowRight"), keyDown("ArrowUp"), function() {
-    this.emberFlowplayer.player.seek(true);
-  }),
+  keyboardSeekForward: on(
+    keyDown("ArrowRight"),
+    keyDown("ArrowUp"),
+    function() {
+      this.emberFlowplayer.player.seek(true);
+    }
+  ),
 
   keyboardSeekBack: on(keyDown("ArrowLeft"), keyDown("ArrowDown"), function() {
     this.emberFlowplayer.player.seek(false);
@@ -62,6 +66,10 @@ export default Component.extend(EKMixin, {
     this.toggleProperty("muted");
     this.emberFlowplayer.player.mute(this.muted);
   }),
+
+  didReceiveAttrs() {
+    this.emberFlowplayer.setLive(this.live);
+  },
 
   didInsertElement() {
     //alert("YO")
@@ -124,6 +132,10 @@ export default Component.extend(EKMixin, {
   actions: {
     togglePlayer() {
       this.get("emberFlowplayer").player.toggle();
+    },
+    mute() {
+      this.toggleProperty("muted");
+      this.emberFlowplayer.player.mute(this.muted);
     }
   }
 });
