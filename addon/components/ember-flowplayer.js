@@ -88,7 +88,7 @@ export default Component.extend(EKMixin, {
     //progress.classList.add("mystyle");
 
     let fp = flowplayer(container, {
-      live: this.live,
+      live: this.emberFlowplayer.isLive,
       splash: false,
       audioOnly: true,
       autoplay: false,

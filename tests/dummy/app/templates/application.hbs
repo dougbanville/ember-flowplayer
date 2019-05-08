@@ -12,5 +12,7 @@
 <EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live=true />
 <EmberFlowplayerChangeSource
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
-    @live="false" />
+    @live="false">Play Back </EmberFlowplayerChangeSource>
+<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live=true>Play Live
+</EmberFlowplayerChangeSource>
 {{outlet}}
