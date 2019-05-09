@@ -1,0 +1,7 @@
+<hr>
+<h1>Most Popular {{model.length}} Items</h1>
+{{#each model as |item| }}
+    <p>{{item.itemid}} {{item.title}}</p>
+    <EmberFlowplayerRtePlay @model={{item}} @id={{item.itemid}}>Play</EmberFlowplayerRtePlay>
+{{/each}}
+{{outlet}}
