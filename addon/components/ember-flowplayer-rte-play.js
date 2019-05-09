@@ -30,15 +30,14 @@ export default Component.extend({
           this.set("hlsUrl", hlsUrl);
           this.emberFlowplayer.change(true);
           let audio = [{ type: this.type, src: this.hlsUrl }];
-          console.log * `live = ${this.id}`;
           this.emberFlowplayer.setLive(this.id);
           this.emberFlowplayer.player.load({
             sources: audio
           });
+          this.emberFlowplayer.setNowPlaying(model);
         })
         .catch(function(ex) {
-          console.log(ex);
-          alert("Could nopt find that audio");
+          alert("Could not find that audio");
         });
     }
   }

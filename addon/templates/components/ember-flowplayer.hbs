@@ -34,8 +34,12 @@
         </div>
         <div class="small-7 medium-8 cell">
           <a href="#/radio1/11033283" id="ember859" class="active ember-view">
-            <h4 class="hoverUl">
-              {{yield }}</h4>
+            {{#if emberFlowplayer.nowPlaying }}
+              <h4 class="hoverUl">
+                {{emberFlowplayer.nowPlaying.title}}</h4>
+            {{else}}
+              <h4 class="hoverUl">{{ yield }}</h4>
+            {{/if}}
           </a>
           {{#if emberFlowplayer.changeSrc}}
             Loading

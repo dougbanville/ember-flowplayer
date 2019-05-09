@@ -45,5 +45,9 @@ export default Service.extend({
   },
   change(s) {
     this.set("changeSrc", s);
+  },
+
+  setNowPlaying(model) {
+    this.set("nowPlaying", model);
   }
 });

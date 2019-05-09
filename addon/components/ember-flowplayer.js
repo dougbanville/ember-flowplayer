@@ -78,8 +78,6 @@ export default Component.extend(EKMixin, {
 
     let container = document.getElementById("ember-flowplayer");
 
-    $(".animated").addClass("radio1");
-
     //progress.classList.add("mystyle");
 
     let fp = flowplayer(container, {

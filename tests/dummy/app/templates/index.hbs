@@ -1,7 +1,11 @@
 <hr>
-<h1>Most Popular {{model.length}} Items</h1>
+<h1>Most Popular {{model.length}} Playback Items</h1>
 {{#each model as |item| }}
     <p>{{item.itemid}} {{item.title}}</p>
-    <EmberFlowplayerRtePlay @model={{item}} @id={{item.itemid}}>Play</EmberFlowplayerRtePlay>
+    {{#if (eq item.itemid emberFlowplayer.nowPlaying.itemid)}}
+        <EmberFlowplayerPillButton><i class="icon-RP-Webfont_Pause"></i>Pause</EmberFlowplayerPillButton>
+    {{else}}
+        <EmberFlowplayerRtePlay @model={{item}} @id={{item.itemid}}>Play</EmberFlowplayerRtePlay>
+    {{/if}}
 {{/each}}
 {{outlet}}
