@@ -2,7 +2,7 @@
 <h2>Ember Flowplayer Audio</h2>
 <h3>{{model.length}}</h3>
 <ul>
-    <li>isLive: {{ emberFlowplayer.player.live }}</li>
+    <li>isLive: {{ emberFlowplayer.isLive }}</li>
     <li>isPlaying: {{ emberFlowplayer.isPlaying }}</li>
     <li>Audio duration: {{emberFlowplayer.duration}}</li>
     <li>Audio Current Time: {{emberFlowplayer.currentTime}}</li>
@@ -17,8 +17,8 @@
 
 <EmberFlowplayerChangeSource
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
-    @live="1000000">Play Back </EmberFlowplayerChangeSource>
-<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live="1">
+    @id="1000000">Play Back </EmberFlowplayerChangeSource>
+<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @id="1">
     Play Live
 </EmberFlowplayerChangeSource>
 {{outlet}}
