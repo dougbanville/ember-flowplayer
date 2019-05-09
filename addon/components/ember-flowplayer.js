@@ -67,14 +67,9 @@ export default Component.extend(EKMixin, {
     this.emberFlowplayer.player.mute(this.muted);
   }),
 
-  didReceiveAttrs() {
-    this.emberFlowplayer.setLive(this.live);
-  },
-
   didInsertElement() {
     //alert("YO")
 
-    this.$(".fp-controls").attr("style", "text-align: center");
     let audio = [
       // native HLS support accepts icecast source
       { type: this.get("type"), src: this.get("source") }
@@ -88,7 +83,6 @@ export default Component.extend(EKMixin, {
     //progress.classList.add("mystyle");
 
     let fp = flowplayer(container, {
-      live: this.emberFlowplayer.isLive,
       splash: false,
       audioOnly: true,
       autoplay: false,
@@ -99,10 +93,10 @@ export default Component.extend(EKMixin, {
       .on("progress.android", function(e) {
         // *if* Android plays it, it botches up duration initially, overwrite
       })
-      .on("resume", _ => {
+      .on("resume", () => {
         this.get("emberFlowplayer").setStatus("playing");
       })
-      .on("pause", _ => {
+      .on("pause", () => {
         this.get("emberFlowplayer").setStatus("paused");
       })
       .on("progress", (e, api) => {
@@ -111,7 +105,6 @@ export default Component.extend(EKMixin, {
         }
       })
       .on("ready", (e, api) => {
-        console.log("aye aye sir");
         this.emberFlowplayer.change(false);
         this.get("emberFlowplayer").setDuration(api.video.duration);
         this.set("ready", true);
@@ -126,7 +119,6 @@ export default Component.extend(EKMixin, {
     this.get("emberFlowplayer").setPlayer(fp);
 
     this.get("emberFlowplayer").player.load();
-    return fp;
   },
 
   actions: {

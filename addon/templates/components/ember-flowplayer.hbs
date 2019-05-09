@@ -35,16 +35,20 @@
         <div class="small-7 medium-8 cell">
           <a href="#/radio1/11033283" id="ember859" class="active ember-view">
             <h4 class="hoverUl">
-              Mooney Goes Wild {{emberFlowplayer.isLive }}</h4>
+              {{yield }} {{emberFlowplayer.isLive }}</h4>
           </a>
           {{#if emberFlowplayer.changeSrc}}
             Loading
           {{else}}
             {{#if emberFlowplayer.isLive}}
               Live
-            {{else if emberFlowplayer.duration}}
+            {{else}}
+              Playback
+              {{#if emberFlowplayer.duration}}
 
-              <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}} />
+                <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}}
+                  @live={{emberFlowplayer.isLive}} />
+              {{/if}}
 
             {{/if}}
           {{/if}}

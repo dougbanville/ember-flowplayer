@@ -14,7 +14,7 @@ export default Component.extend({
 
   didInsertElement() {
     var rangeSlider = document.getElementById("ember-flowplayer-player-range");
-
+    console.log(`making slider`);
     noUiSlider.create(rangeSlider, {
       start: [this.value],
       value: [this.value],

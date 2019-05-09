@@ -1,6 +1,6 @@
 {{! template-lint-disable }}
 <h2>Ember Flowplayer Audio</h2>
-
+<h3>{{model.length}}</h3>
 <ul>
     <li>isLive: {{ emberFlowplayer.player.live }}</li>
     <li>isPlaying: {{ emberFlowplayer.isPlaying }}</li>
@@ -9,10 +9,16 @@
     <li>Audio Volume: {{emberFlowplayer.player.volumeLevel}}</li>
 
 </ul>
-<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live=true />
+
+
+<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8">
+    {{model.fields.progname }}
+</EmberFlowplayer>
+
 <EmberFlowplayerChangeSource
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
-    @live="false">Play Back </EmberFlowplayerChangeSource>
-<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live=true>Play Live
+    @live="1000000">Play Back </EmberFlowplayerChangeSource>
+<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @live="1">
+    Play Live
 </EmberFlowplayerChangeSource>
 {{outlet}}

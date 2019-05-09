@@ -12,7 +12,11 @@ export default Service.extend({
 
   setLive(live) {
     console.log(`Setting live to ${live}`);
-    this.set("isLive", live);
+    if (live > 100) {
+      this.set("isLive", false);
+    } else {
+      this.set("isLive", true);
+    }
   },
 
   setPlayer(fp) {
