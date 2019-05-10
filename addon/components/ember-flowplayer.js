@@ -50,13 +50,9 @@ export default Component.extend(EKMixin, {
     this.get("emberFlowplayer").player.toggle();
   }),
 
-  keyboardSeekForward: on(
-    keyDown("ArrowRight"),
-    keyDown("ArrowUp"),
-    function() {
-      this.emberFlowplayer.player.seek(true);
-    }
-  ),
+  keyboardSeekForward: on(keyDown("ArrowRight"), keyDown("ArrowUp"), function() {
+    this.emberFlowplayer.player.seek(true);
+  }),
 
   keyboardSeekBack: on(keyDown("ArrowLeft"), keyDown("ArrowDown"), function() {
     this.emberFlowplayer.player.seek(false);
@@ -84,6 +80,7 @@ export default Component.extend(EKMixin, {
       splash: false,
       audioOnly: true,
       autoplay: false,
+      live: true,
       clip: {
         sources: audio
       }
@@ -117,6 +114,8 @@ export default Component.extend(EKMixin, {
     this.get("emberFlowplayer").setPlayer(fp);
 
     this.get("emberFlowplayer").player.load();
+
+    return fp;
   },
 
   actions: {
