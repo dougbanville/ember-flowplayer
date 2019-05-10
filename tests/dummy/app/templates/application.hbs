@@ -1,6 +1,5 @@
 {{! template-lint-disable }}
 <h2>Ember Flowplayer Audio</h2>
-<h3>{{model.length}}</h3>
 <ul>
     <li>isLive: {{ emberFlowplayer.isLive }}</li>
     <li>isPlaying: {{ emberFlowplayer.isPlaying }}</li>
@@ -11,14 +10,15 @@
 </ul>
 
 
-<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8">
+<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @audioId="9">
     {{model.fields.progname }}
 </EmberFlowplayer>
 
 <EmberFlowplayerChangeSource
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
-    @id="1000000">Play Back if you know the url</EmberFlowplayerChangeSource>
-<EmberFlowplayerChangeSource @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @id="1">
-    Play Radio 1 Live
-</EmberFlowplayerChangeSource>
+    @audioId="1000000">Play Back if you know the url</EmberFlowplayerChangeSource>
+<EmberFlowplayerRtePlay @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @audioId="9"
+    @model={{ model }}>
+    Play Live {{model.title}}
+</EmberFlowplayerRtePlay>
 {{outlet}}

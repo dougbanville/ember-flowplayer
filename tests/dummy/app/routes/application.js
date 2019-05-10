@@ -14,10 +14,12 @@ export default Route.extend({
     return fetchJsonp(url, {
       jsonpCallbackFunction: "html5player"
     })
-      .then(function(response) {
+      .then(response => {
         return response.json();
       })
-      .then(function(json) {
+      .then(json => {
+        json[0].title = json[0].fields.progname;
+        this.emberFlowplayer.setNowPlaying(json[0]);
         return json[0];
       })
       .catch(function(ex) {

@@ -5,7 +5,7 @@
     {{#if (eq item.itemid emberFlowplayer.nowPlaying.itemid)}}
         <EmberFlowplayerPillButton><i class="icon-RP-Webfont_Pause"></i>Pause</EmberFlowplayerPillButton>
     {{else}}
-        <EmberFlowplayerRtePlay @model={{item}} @id={{item.itemid}}>Play</EmberFlowplayerRtePlay>
+        <EmberFlowplayerRtePlay @model={{item}} @audioId={{item.itemid}}>Play</EmberFlowplayerRtePlay>
     {{/if}}
 {{/each}}
 {{outlet}}

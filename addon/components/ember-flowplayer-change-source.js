@@ -12,8 +12,7 @@ export default Component.extend({
     play() {
       this.emberFlowplayer.change(true);
       let audio = [{ type: this.type, src: this.source }];
-      console.log * `live = ${this.id}`;
-      this.emberFlowplayer.setLive(this.id);
+      this.emberFlowplayer.setLive(this.audioId);
       this.emberFlowplayer.player
         .load({
           sources: audio
