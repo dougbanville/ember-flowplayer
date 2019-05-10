@@ -13,11 +13,9 @@ export default Component.extend({
       this.emberFlowplayer.change(true);
       let audio = [{ type: this.type, src: this.source }];
       this.emberFlowplayer.setLive(this.audioId);
-      this.emberFlowplayer.player
-        .load({
-          sources: audio
-        })
-        .on("ready", (e, api) => {});
+      this.emberFlowplayer.player.load({
+        sources: audio
+      });
     }
   }
 });
