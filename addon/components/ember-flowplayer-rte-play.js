@@ -11,6 +11,12 @@ export default Component.extend({
 
   type: "application/x-mpegurl",
 
+  isInPlayer: computed("emberFlowplayer.audioId.[]", function() {
+    if (this.emberFlowplayer.audioId == this.audioId) {
+      return true;
+    }
+  }),
+
   isPlaying: computed("emberFlowplayer.{isPlaying.[],audioId.[]}", function() {
     if (this.emberFlowplayer.isPlaying && this.emberFlowplayer.audioId == this.audioId) {
       return true;
@@ -20,30 +26,35 @@ export default Component.extend({
   actions: {
     play(model) {
       if (this.audioId < 100) {
+        //it's live
         this.send("playLive", model);
       } else {
-        let url = `https://feeds.rasset.ie/rteavgen/getplaylist/?format=jsonp&id=${this.audioId}`;
-        fetchJsonp(url, {
-          jsonpCallbackFunction: "html5player"
-        })
-          .then(response => {
-            return response.json();
+        if (this.isInPlayer) {
+          this.emberFlowplayer.player.toggle();
+        } else {
+          let url = `https://feeds.rasset.ie/rteavgen/getplaylist/?format=jsonp&id=${this.audioId}`;
+          fetchJsonp(url, {
+            jsonpCallbackFunction: "html5player"
           })
-          .then(json => {
-            //console.dir(json.shows[0]["media:group"][0]);
-            let hlsUrl = json.shows[0]["media:group"][0].hls_server + json.shows[0]["media:group"][0].hls_url;
-            this.set("hlsUrl", hlsUrl);
-            this.emberFlowplayer.change(true);
-            let audio = [{ type: this.type, src: this.hlsUrl }];
-            this.emberFlowplayer.setLive(this.audioId);
-            this.emberFlowplayer.player.load({
-              sources: audio
+            .then(response => {
+              return response.json();
+            })
+            .then(json => {
+              //console.dir(json.shows[0]["media:group"][0]);
+              let hlsUrl = json.shows[0]["media:group"][0].hls_server + json.shows[0]["media:group"][0].hls_url;
+              this.set("hlsUrl", hlsUrl);
+              this.emberFlowplayer.change(true);
+              let audio = [{ type: this.type, src: this.hlsUrl }];
+              this.emberFlowplayer.setLive(this.audioId);
+              this.emberFlowplayer.player.load({
+                sources: audio
+              });
+              this.emberFlowplayer.setNowPlaying(model);
+            })
+            .catch(function(ex) {
+              alert("Could not find that audio");
             });
-            this.emberFlowplayer.setNowPlaying(model);
-          })
-          .catch(function(ex) {
-            alert("Could not find that audio");
-          });
+        }
       }
     },
     playLive(model) {
@@ -71,6 +82,9 @@ export default Component.extend({
         .catch(function(ex) {
           alert("couldn't find that live stream");
         });
+    },
+    pause() {
+      this.emberFlowplayer.player.toggle();
     }
   }
 });

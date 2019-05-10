@@ -1,10 +1,8 @@
 audio id: {{emberFlowplayer.audioId}} isPLaying:{{emberFlowplayer.isPlaying}} isPLayingHere {{isPlaying}}
-
+isInPlayer: {{isInPlayer}}
 {{#if isPlaying}}
-
-    <EmberFlowplayerPillButton @play={{action "play" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
+    <EmberFlowplayerPillButton onclick={{action "pause" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
     </EmberFlowplayerPillButton>
-
 {{else}}
     <EmberFlowplayerPillButton onclick={{action "play" model}}><i class="icon-RP-Webfont_Play"></i>{{yield}}
     </EmberFlowplayerPillButton>
