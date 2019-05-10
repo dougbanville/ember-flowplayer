@@ -2,6 +2,7 @@ import Component from "@ember/component";
 import layout from "../templates/components/ember-flowplayer-rte-play";
 import fetchJsonp from "fetch-jsonp";
 import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   layout,
@@ -9,6 +10,12 @@ export default Component.extend({
   emberFlowplayer: service(),
 
   type: "application/x-mpegurl",
+
+  isPlaying: computed("emberFlowplayer.{isPlaying.[],audioId.[]}", function() {
+    if (this.emberFlowplayer.isPlaying && this.emberFlowplayer.audioId == this.audioId) {
+      return true;
+    }
+  }),
 
   actions: {
     play(model) {

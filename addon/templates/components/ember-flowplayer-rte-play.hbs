@@ -1,4 +1,12 @@
-<button class="radio1 progPlayButton" style="display:block;" {{action "play" model}}>
-    <i class="icon-RP-Webfont_Play"></i>{{yield}}
-</button>
+audio id: {{emberFlowplayer.audioId}} isPLaying:{{emberFlowplayer.isPlaying}} isPLayingHere {{isPlaying}}
+
+{{#if isPlaying}}
+
+    <EmberFlowplayerPillButton @play={{action "play" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
+    </EmberFlowplayerPillButton>
+
+{{else}}
+    <EmberFlowplayerPillButton onclick={{action "play" model}}><i class="icon-RP-Webfont_Play"></i>{{yield}}
+    </EmberFlowplayerPillButton>
+{{/if}}
 {{yield}}
