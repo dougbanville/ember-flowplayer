@@ -50,5 +50,39 @@ export default Service.extend({
 
   setNowPlaying(model) {
     this.set("nowPlaying", model);
+  },
+
+  getClipEventData: (avItem, action) => {
+    var channel = avItem.channel ? avItem.channel : "",
+      playlist_name = this.getPlayListName(avItem),
+      programme = programme ? avItem.programme : "",
+      mediaType = avItem.type,
+      theme3 = "",
+      videoLabel = "",
+      published = avItem.published,
+      pub_date = "";
+    published = published.match("[0-9]{4}([-/ .])[0-9]{2}[-/ .][0-9]{2}");
+
+    if (published) pub_date = published[0];
+
+    if (mediaType == "audio") {
+      theme3 = channel;
+    } else {
+      theme3 = avItem.provider;
+    }
+
+    videoLabel = avItem.id;
+    let clipEventData = {
+      action: action,
+      mediaLabel: videoLabel,
+      mediaTheme1: cleanTitles(playlist_name),
+      mediaTheme2: pub_date,
+      mediaTheme3: theme3, //WE NEED TO ADD RADIO CHANELS HERE
+      playerId: "1"
+    };
+
+    //return clipEventData;
+
+    tag.richMedia.send(clipEventData);
   }
 });

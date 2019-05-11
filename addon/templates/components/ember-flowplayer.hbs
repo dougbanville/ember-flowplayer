@@ -1,3 +1,4 @@
+<AtInternet />
 <style>
   .fp-player {
     display: none;
@@ -45,7 +46,7 @@
             Loading
           {{else}}
             {{#if emberFlowplayer.isLive}}
-              Live
+              <EmberFlowplayerLiveRange />
             {{else}}
               {{#if emberFlowplayer.duration}}
                 <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}}

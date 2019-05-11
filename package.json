@@ -27,6 +27,9 @@
     "ember-keyboard": "^4.0.0",
     "ember-auto-import": "^1.2.19",
     "numeral": "^2.0.6",
+    "ember-concurrency": "^0.10.0",
+    "ember-cli-moment-shim": "^3.7.1",
+    "ember-moment": "^7.8.1",
     "fetch-jsonp": "^1.1.3"
   },
   "devDependencies": {
@@ -43,7 +46,6 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
-    "ember-concurrency": "^0.10.0",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.1.0",

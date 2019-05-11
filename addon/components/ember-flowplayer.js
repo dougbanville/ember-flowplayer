@@ -11,6 +11,8 @@ export default Component.extend(EKMixin, {
 
   emberFlowplayer: service(),
 
+  atInternet: service(),
+
   source: "https://cdn.rte.ie/live/ieradio1/playlist.m3u8",
 
   type: "application/x-mpegurl",
@@ -89,6 +91,32 @@ export default Component.extend(EKMixin, {
         // *if* Android plays it, it botches up duration initially, overwrite
       })
       .on("resume", () => {
+        let tagData = {
+          action: "play",
+          mediaLabel: 804840,
+          mediaTheme1: "Marian Finucane|Marian Finucane",
+          mediaTheme2: "2019-05-11",
+          mediaTheme3: "RTÉ Radio 1",
+          playerId: "1"
+        };
+        //this.atInternet.sendTag(tagData);
+        let tag = new ATInternet.Tracker.Tag();
+        tag.richMedia.add({
+          mediaType: "audio",
+          playerId: 123,
+          mediaLevel2: "mediaLevel2",
+          mediaLabel: "mediaAudio",
+          mediaTheme1: "mediaRock",
+          isEmbedded: false,
+          broadcastMode: "live"
+        });
+        tag.richMedia.send({
+          action: "play",
+          playerId: 123,
+          mediaLabel: "mediaAudio",
+          mediaTheme1: "mediaRock"
+        });
+        console.log(tag.richMedia);
         this.get("emberFlowplayer").setStatus("playing");
       })
       .on("pause", () => {
