@@ -147,7 +147,7 @@ export default Component.extend(EKMixin, {
   },
 
   actions: {
-    togglePlayer() {
+    togglePlayer(state) {
       this.get("emberFlowplayer").player.toggle();
     },
     mute() {

@@ -30,7 +30,7 @@ export default Service.extend({
     var minutes = Math.floor((time - hours * 3600) / 60);
     var seconds = time - hours * 3600 - minutes * 60;
     let humanTime = `${minutes} minutes`;
-    if (seconds < 60) {
+    if (seconds < 60 && minutes < 1) {
       humanTime = `Started ${seconds} seconds`;
     }
     if (seconds === 60) {
