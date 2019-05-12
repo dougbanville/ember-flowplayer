@@ -60,9 +60,9 @@
 
           <div class="duration_information">
             <EmberFlowplayerTime @duration={{emberFlowplayer.currentTime}} />
-            {{#if player.isLive}}
-              <NumeralFormat @duration={{ player.nowPlaying.lastObject.duration }} class="float-right" />
-              {{timeLeft}}
+            {{#if emberFlowplayer.isLive}}
+              <EmberFlowplayerTime @duration={{ emberFlowplayer.nowPlaying.duration }} class="float-right" />
+              {{timeLeft}} Started {{emberFlowplayer.liveProgrammeTimeLeft}} ago
             {{else}}
               <EmberFlowplayerTime @duration={{emberFlowplayer.duration}} class="float-right" />
             {{/if}}

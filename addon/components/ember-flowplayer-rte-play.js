@@ -68,7 +68,6 @@ export default Component.extend({
           return response.json();
         })
         .then(json => {
-          console.log(json[0].fullUrl);
           let hlsUrl = json[0].fullUrl;
           this.set("hlsUrl", hlsUrl);
           this.emberFlowplayer.change(true);

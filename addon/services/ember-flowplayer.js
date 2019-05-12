@@ -1,5 +1,6 @@
 import Service from "@ember/service";
 import emberFlowplayer from "../components/ember-flowplayer";
+import moment from "moment";
 
 export default Service.extend({
   status: "idle",
@@ -9,15 +10,42 @@ export default Service.extend({
   currentTime: 0,
 
   changeSrc: false,
+  //Set this when all the info is ready ie afterModel
+  setReady() {
+    this.set("ready", true);
+  },
 
   setLive(live) {
-    console.log(`Setting live to ${live}`);
     this.set("audioId", live);
     if (live > 100) {
       this.set("isLive", false);
     } else {
       this.set("isLive", true);
     }
+  },
+
+  setLiveProgrammeTimeLeft(toTheEnd) {
+    let time = parseInt(toTheEnd, 10);
+    var hours = Math.floor(time / 3600);
+    var minutes = Math.floor((time - hours * 3600) / 60);
+    var seconds = time - hours * 3600 - minutes * 60;
+    let humanTime = `${minutes} minutes`;
+    if (seconds < 60) {
+      humanTime = `Started ${seconds} seconds`;
+    }
+    if (seconds === 60) {
+      humanTime`Started ${minutes} minute`;
+    }
+    if (seconds > 60 && seconds < 3600) {
+      humanTime = `${minutes} minutes`;
+    }
+    if (hours === 1) {
+      humanTime = `${hours} hour ${minutes} minutes`;
+    }
+    if (hours > 1) {
+      humanTime = `${hours} hours ${minutes} minutes`;
+    }
+    this.set("liveProgrammeTimeLeft", `${humanTime}`);
   },
 
   setPlayer(fp) {

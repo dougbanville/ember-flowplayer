@@ -8,13 +8,15 @@ import moment from "moment";
 export default Component.extend({
   layout,
 
+  emberFlowplayer: service(),
+
   tagName: "div",
 
   elementId: "ember-flowplayer-liverange",
 
-  showDuration: 6600,
+  showDuration: 0,
 
-  startTime: "2019-05-11 14:00",
+  startTime: "2019-06-11 14:00",
 
   timeLeft: 0,
 
@@ -34,7 +36,7 @@ export default Component.extend({
       disabled: true,
       range: {
         min: [0],
-        max: [this.showDuration]
+        max: [this.emberFlowplayer.nowPlaying.duration]
       }
     });
     this.set("rangeSlider", rangeSlider);
@@ -47,9 +49,10 @@ export default Component.extend({
 
   updateRange: task(function*() {
     while (true) {
-      let toTheEnd = moment(moment()).diff(moment(this.startTime), "seconds");
+      let toTheEnd = moment(moment()).diff(moment(this.emberFlowplayer.nowPlaying.start), "seconds");
+      this.emberFlowplayer.setLiveProgrammeTimeLeft(toTheEnd);
       this.set("timeLeft", toTheEnd);
-      console.log(this.timeLeft);
+
       if (this.ready) {
         this.rangeSlider.noUiSlider.set(this.timeLeft);
       }

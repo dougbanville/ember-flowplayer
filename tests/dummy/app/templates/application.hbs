@@ -1,19 +1,20 @@
 {{! template-lint-disable }}
-<h2>Ember Flowplayer Audio</h2>
+<h2>Ember Flowplayer Audio {{emberFlowplayer.nowPlaying.start}} {{emberFlowplayer.nowPlaying.duration}}</h2>
 <ul>
     <li>isLive: {{ emberFlowplayer.isLive }}</li>
     <li>isPlaying: {{ emberFlowplayer.isPlaying }}</li>
     <li>Audio duration: {{emberFlowplayer.duration}}</li>
     <li>Audio Current Time: {{emberFlowplayer.currentTime}}</li>
     <li>Audio Volume: {{emberFlowplayer.player.volumeLevel}}</li>
+    <li>Audio Id: {{emberFlowplayer.nowPlaying.audioId}}</li>
+    <li>ready: {{emberFlowplayer.ready}}</li>
 
 </ul>
 
 
-<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @audioId="9" @model={{ model }}>>
+<EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @audioId="9" @model={{ model }}>
     {{model.fields.progname }}
 </EmberFlowplayer>
-
 <EmberFlowplayerChangeSource
     @source="https://cdn.rasset.ie/manifest/audio/2019/0404/20190404_rteradio1-bitesize-theryantub_c21535005_21535006_261_/manifest.m3u8"
     @audioId="1000000">Play Back if you know the url</EmberFlowplayerChangeSource>
