@@ -52,9 +52,13 @@ export default Component.extend(EKMixin, {
     this.get("emberFlowplayer").player.toggle();
   }),
 
-  keyboardSeekForward: on(keyDown("ArrowRight"), keyDown("ArrowUp"), function() {
-    this.emberFlowplayer.player.seek(true);
-  }),
+  keyboardSeekForward: on(
+    keyDown("ArrowRight"),
+    keyDown("ArrowUp"),
+    function() {
+      this.emberFlowplayer.player.seek(true);
+    }
+  ),
 
   keyboardSeekBack: on(keyDown("ArrowLeft"), keyDown("ArrowDown"), function() {
     this.emberFlowplayer.player.seek(false);
@@ -104,35 +108,27 @@ export default Component.extend(EKMixin, {
           mediaTheme3: "RTÉ Radio 1",
           playerId: "1"
         };
+        /*
+        action: "play"
+        mediaLabel: 922845
+        mediaTheme1: "Today with Sean ORourke|Today with Sean ORourke"
+        mediaTheme2: "2019-05-17"
+        mediaTheme3: "RTÉ Radio 1"
+        playerId: "1"
+        */
         //this.atInternet.sendTag(tagData);
-        let tag = new ATInternet.Tracker.Tag();
-        tag.richMedia.add({
-          mediaType: "audio",
-          playerId: 123,
-          mediaLevel2: "mediaLevel2",
-          mediaLabel: "mediaAudio",
-          mediaTheme1: "mediaRock",
-          isEmbedded: false,
-          broadcastMode: "live"
-        });
-        tag.richMedia.send({
-          action: "play",
-          playerId: 123,
-          mediaLabel: "mediaAudio",
-          mediaTheme1: "mediaRock"
-        });
-        console.log(tag.richMedia);
+        console.log("NOW PLAYING");
+        //!send the data to at Internet using services/atInternet
+        this.atInternet.sendTag("play");
         this.get("emberFlowplayer").setStatus("playing");
       })
       .on("pause", () => {
+        this.atInternet.sendTag("pause");
         this.get("emberFlowplayer").setStatus("paused");
       })
       .on("progress", (e, api, time) => {
         if (!this.emberFlowplayer.sliding) {
           let fivesecs = time % 5 === 0;
-          console.log(fivesecs);
-          let seconds = Math.round(api.video.time);
-          seconds = Math.round(api.video.time) * 1000;
           /*
           let fivesecs = api.video.time % 5 === 0 && api.video.time % 1 != 0;
           let isWhole = api.video.time % 1 != 0;
