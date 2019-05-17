@@ -1,10 +1,22 @@
-audio id: {{emberFlowplayer.audioId}} isPLaying:{{emberFlowplayer.isPlaying}} isPLayingHere {{isPlaying}}
-isInPlayer: {{isInPlayer}}
-{{#if isPlaying}}
-    <EmberFlowplayerPillButton onclick={{action "pause" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
-    </EmberFlowplayerPillButton>
+{{#if pillButton}}
+    {{#if isPlaying}}
+        <EmberFlowplayerPillButton onclick={{action "pause" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
+        </EmberFlowplayerPillButton>
+    {{else}}
+        <EmberFlowplayerPillButton onclick={{action "play" model}}><i class="icon-RP-Webfont_Play"></i>{{yield}}
+        </EmberFlowplayerPillButton>
+    {{/if}}
 {{else}}
-    <EmberFlowplayerPillButton onclick={{action "play" model}}><i class="icon-RP-Webfont_Play"></i>{{yield}}
-    </EmberFlowplayerPillButton>
+    {{#if isPlaying}}
+        <EmberFlowplayerRoundButton class="circular_button button radio1 mobile_list_button"
+            onclick={{action "pause" model}}>
+
+        </EmberFlowplayerRoundButton>
+    {{else}}
+        <EmberFlowplayerRoundButton class="circular_button button radio1 mobile_list_button"
+            onclick={{action "play" model}}>
+
+        </EmberFlowplayerRoundButton>
+    {{/if}}
 {{/if}}
 {{yield}}

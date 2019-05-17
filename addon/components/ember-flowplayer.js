@@ -74,7 +74,6 @@ export default Component.extend(EKMixin, {
   }),
 
   didReceiveAttrs() {
-    console.log("rec");
     this.set("error", false);
     this.set("ready", true);
     this.emberFlowplayer.change(false);
