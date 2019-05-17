@@ -13,7 +13,7 @@
 
 
 <EmberFlowplayer @source="https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8" @audioId="9" @model={{ model }}
-    @reload={{action "reloadPage"}}>
+    @reload={{action "reloadPage"}} @playerEventAction={{action "atiAction"}}>
     {{model.fields.progname }}
 </EmberFlowplayer>
 <EmberFlowplayerChangeSource

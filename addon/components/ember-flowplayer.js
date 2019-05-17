@@ -27,6 +27,10 @@ export default Component.extend(EKMixin, {
 
   muted: false,
 
+  onPlayAction: function() {
+    return true;
+  },
+
   errorCodes: function() {
     let codes = {
       1: "Loading Aborted",
@@ -100,6 +104,7 @@ export default Component.extend(EKMixin, {
         // *if* Android plays it, it botches up duration initially, overwrite
       })
       .on("resume", () => {
+        this.playerEventAction("play");
         let tagData = {
           action: "play",
           mediaLabel: 804840,
@@ -108,38 +113,16 @@ export default Component.extend(EKMixin, {
           mediaTheme3: "RTÉ Radio 1",
           playerId: "1"
         };
-        /*
-        action: "play"
-        mediaLabel: 922845
-        mediaTheme1: "Today with Sean ORourke|Today with Sean ORourke"
-        mediaTheme2: "2019-05-17"
-        mediaTheme3: "RTÉ Radio 1"
-        playerId: "1"
-        */
-        //this.atInternet.sendTag(tagData);
-        console.log("NOW PLAYING");
         //!send the data to at Internet using services/atInternet
-        this.atInternet.sendTag("play");
+        //this.atInternet.sendTag("play");
         this.get("emberFlowplayer").setStatus("playing");
       })
       .on("pause", () => {
-        this.atInternet.sendTag("pause");
+        this.playerEventAction("pause");
         this.get("emberFlowplayer").setStatus("paused");
       })
       .on("progress", (e, api, time) => {
         if (!this.emberFlowplayer.sliding) {
-          let fivesecs = time % 5 === 0;
-          /*
-          let fivesecs = api.video.time % 5 === 0 && api.video.time % 1 != 0;
-          let isWhole = api.video.time % 1 != 0;
-
-          if (isWhole && fivesecs && seconds > 1) {
-            console.log(`${seconds} ${fivesecs} ${isWhole} ${api.video.time}`);
-            return true;
-          } else {
-            this.set("sendFive", false);
-          }
-          */
           this.get("emberFlowplayer").setTime(api.video.time);
         }
       })
@@ -150,6 +133,7 @@ export default Component.extend(EKMixin, {
         $(".fp-progress").addClass(this.get("customClass"));
       })
       .on("error", (e, api, error) => {
+        this.playerEventAction("error");
         this.set("error", true);
         this.get("emberFlowplayer").setStatus("paused");
         let errorCodes = this.errorCodes();

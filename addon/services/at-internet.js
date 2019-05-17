@@ -31,3 +31,12 @@ export default Service.extend({
     });
   }
 });
+
+/*
+        action: "play"
+        mediaLabel: 922845
+        mediaTheme1: "Today with Sean ORourke|Today with Sean ORourke"
+        mediaTheme2: "2019-05-17"
+        mediaTheme3: "RTÉ Radio 1"
+        playerId: "1"
+        */

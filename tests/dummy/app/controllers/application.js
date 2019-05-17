@@ -19,6 +19,9 @@ export default Controller.extend({
     },
     reloadPage() {
       this.send("reloadRoute");
+    },
+    atiAction(data) {
+      alert(data);
     }
   }
 });
