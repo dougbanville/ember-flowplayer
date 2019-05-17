@@ -8,9 +8,17 @@
     display: none;
   }
 </style>
-{{#if error }}
-  <div>{{errorMessage}} </div>
+{{#if error}}
+  <div
+    style="height:100px; position:absolute; z-index:100; background:rgba(0,0,0,0.4); width:100%; display:flex; align-items:center;">
+    <div class="grid-container">
+      <div class="grid-x">
+        <button class="button" {{ action "reloadAfterError"}}>{{errorMessage}} Reload</button>
+      </div>
+    </div>
+  </div>
 {{/if}}
+
 <div style="height:0px;">
   <div id="ember-flowplayer"></div>
 </div>

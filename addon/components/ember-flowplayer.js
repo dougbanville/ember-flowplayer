@@ -65,9 +65,14 @@ export default Component.extend(EKMixin, {
     this.emberFlowplayer.player.mute(this.muted);
   }),
 
-  didInsertElement() {
-    //alert("YO")
+  didReceiveAttrs() {
+    console.log("rec");
+    this.set("error", false);
+    this.set("ready", true);
+    this.emberFlowplayer.change(false);
+  },
 
+  didInsertElement() {
     let audio = [
       // native HLS support accepts icecast source
       { type: this.get("type"), src: this.get("source") }
@@ -122,8 +127,23 @@ export default Component.extend(EKMixin, {
       .on("pause", () => {
         this.get("emberFlowplayer").setStatus("paused");
       })
-      .on("progress", (e, api) => {
+      .on("progress", (e, api, time) => {
         if (!this.emberFlowplayer.sliding) {
+          let fivesecs = time % 5 === 0;
+          console.log(fivesecs);
+          let seconds = Math.round(api.video.time);
+          seconds = Math.round(api.video.time) * 1000;
+          /*
+          let fivesecs = api.video.time % 5 === 0 && api.video.time % 1 != 0;
+          let isWhole = api.video.time % 1 != 0;
+
+          if (isWhole && fivesecs && seconds > 1) {
+            console.log(`${seconds} ${fivesecs} ${isWhole} ${api.video.time}`);
+            return true;
+          } else {
+            this.set("sendFive", false);
+          }
+          */
           this.get("emberFlowplayer").setTime(api.video.time);
         }
       })
@@ -135,6 +155,7 @@ export default Component.extend(EKMixin, {
       })
       .on("error", (e, api, error) => {
         this.set("error", true);
+        this.get("emberFlowplayer").setStatus("paused");
         let errorCodes = this.errorCodes();
         this.set("errorMessage", errorCodes[error.code]);
       });
@@ -153,6 +174,9 @@ export default Component.extend(EKMixin, {
     mute() {
       this.toggleProperty("muted");
       this.emberFlowplayer.player.mute(this.muted);
+    },
+    reloadAfterError() {
+      this.reload();
     }
   }
 });

@@ -16,6 +16,9 @@ export default Controller.extend({
     mute() {
       this.toggleProperty("muted");
       this.emberFlowplayer.player.mute(this.muted);
+    },
+    reloadPage() {
+      this.send("reloadRoute");
     }
   }
 });

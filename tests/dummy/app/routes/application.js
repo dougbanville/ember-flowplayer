@@ -29,5 +29,9 @@ export default Route.extend({
         console.log("parsing failed", ex);
       });
   },
-  afterModel() {}
+  actions: {
+    reloadRoute() {
+      this.refresh();
+    }
+  }
 });
