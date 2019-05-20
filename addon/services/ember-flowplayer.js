@@ -16,6 +16,7 @@ export default Service.extend({
   },
 
   setLive(live) {
+    console.log(live);
     this.set("audioId", live);
     if (live > 100) {
       this.set("isLive", false);
