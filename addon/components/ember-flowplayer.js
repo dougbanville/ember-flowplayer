@@ -85,6 +85,7 @@ export default Component.extend(EKMixin, {
       { type: this.get("type"), src: this.get("source") }
     ];
     this.set("audio", audio);
+    this.emberFlowplayer.setLive(this.audioId);
 
     let container = document.getElementById("ember-flowplayer");
 

@@ -6,7 +6,7 @@ export default Route.extend({
   emberFlowplayer: service(),
 
   beforeModel() {
-    this.emberFlowplayer.setLive(9);
+    //this.emberFlowplayer.setLive(9);
   },
   model() {
     let url = `https://feeds.rasset.ie/rtelistings/cal/9/delta/1557254220/`;
