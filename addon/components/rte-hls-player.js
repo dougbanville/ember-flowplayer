@@ -12,18 +12,22 @@ export default Component.extend({
 
   didInsertElement() {
     var rteAudio = document.getElementById("rteAudio");
+    this.rteHlsAudio.setPlayer(rteAudio);
+
+    this.set("rteAudio", rteAudio);
     if (Hls.isSupported()) {
       var hls = new Hls();
-      this.rteHlsAudio.setPlayer(hls);
       // bind them together
-      this.rteHlsAudio.player.attachMedia(rteAudio);
+      hls.attachMedia(rteAudio);
       // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
-      this.rteHlsAudio.player.on(Hls.Events.MEDIA_ATTACHED, () => {
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
         console.log("video and hls.js are now bound together !");
-        this.rteHlsAudio.player.loadSource(
-          this.emberFlowplayer.nowPlaying.liveStream
-        );
+        hls.loadSource(this.emberFlowplayer.nowPlaying.liveStream);
       });
     }
+
+    this.rteHlsAudio.player.onplay = () => {
+      this.rteHlsAudio.setPlayerState("playing");
+    };
   }
 });

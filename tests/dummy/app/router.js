@@ -7,6 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('station', function() {
+    this.route('playback', function() {});
+  });
 });
 
 export default Router;

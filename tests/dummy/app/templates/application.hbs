@@ -1,4 +1,9 @@
 {{! template-lint-disable }}
+{{#if rteHlsAudio.isReady}}
+    <RteHlsPlayer />
+{{/if}}
+{{#link-to "station.index"}}Index{{/link-to}}
+{{#link-to "station.playback"}}Playback{{/link-to}}
 <h2>Ember Flowplayer Audio {{emberFlowplayer.nowPlaying.start}} {{emberFlowplayer.nowPlaying.duration}}</h2>
 <ul>
     <li>isLive: {{ emberFlowplayer.isLive }}</li>
@@ -10,7 +15,5 @@
     <li>ready: {{emberFlowplayer.ready}}</li>
 
 </ul>
-{{#if rteHlsAudio.isReady}}
-    <RteHlsPlayer />
-{{/if}}
+
 {{outlet}}
