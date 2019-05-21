@@ -10,5 +10,7 @@
     <li>ready: {{emberFlowplayer.ready}}</li>
 
 </ul>
-<RteHlsPlayer />
+{{#if rteHlsAudio.isReady}}
+    <RteHlsPlayer />
+{{/if}}
 {{outlet}}

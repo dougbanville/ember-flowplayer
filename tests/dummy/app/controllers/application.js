@@ -6,6 +6,8 @@ export default Controller.extend({
 
   muted: false,
 
+  rteHlsAudio: service(),
+
   actions: {
     togglePlayer() {
       this.emberFlowplayer.player.toggle();
