@@ -1,7 +1,10 @@
 <hr>
 <h1>Most Popular {{model.length}} Playback Items</h1>
 {{#each model as |item| }}
+
+  <emberFlowplayerRtePlay />
   <p>{{item.itemid}} {{item.title}} {{emberFlowplayer.isPlaying}} {{emberFlowplayer.audioId}}</p>
+  <RteHlsPlayButton @model={{ item }} @audioId={{item.itemid}} />
 
 {{/each}}
 {{outlet}}
