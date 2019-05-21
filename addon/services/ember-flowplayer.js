@@ -10,9 +10,16 @@ export default Service.extend({
   currentTime: 0,
 
   changeSrc: false,
+
+  playerState: "idle",
   //Set this when all the info is ready ie afterModel
   setReady() {
+    console.log("setting ready");
     this.set("ready", true);
+  },
+
+  setNotReady() {
+    this.set("ready", false);
   },
 
   setLive(live) {
@@ -54,6 +61,7 @@ export default Service.extend({
   },
 
   setStatus(status) {
+    this.set("playerState", status);
     this.set("status", status);
     if (status === "playing") {
       this.set("isPlaying", true);
@@ -78,6 +86,7 @@ export default Service.extend({
   },
 
   setNowPlaying(model) {
+    console.log(`setting now playing`);
     this.set("nowPlaying", model);
   },
 

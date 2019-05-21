@@ -80,9 +80,13 @@ export default Component.extend(EKMixin, {
   },
 
   didInsertElement() {
+    console.log(this.source);
     let audio = [
       // native HLS support accepts icecast source
-      { type: this.get("type"), src: this.get("source") }
+      {
+        type: this.get("type"),
+        src: this.emberFlowplayer.nowPlaying.stationDetail.liveStream
+      }
     ];
     this.set("audio", audio);
     this.emberFlowplayer.setLive(this.audioId);
@@ -95,7 +99,7 @@ export default Component.extend(EKMixin, {
       splash: false,
       audioOnly: true,
       autoplay: false,
-      live: true,
+      live: 0,
       clip: {
         sources: audio
       }

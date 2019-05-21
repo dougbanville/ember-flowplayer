@@ -4,6 +4,7 @@ import { inject as service } from "@ember/service";
 import noUiSlider from "nouislider";
 import { task, timeout } from "ember-concurrency";
 import moment from "moment";
+import { computed } from "@ember/object";
 
 export default Component.extend({
   layout,
@@ -24,9 +25,16 @@ export default Component.extend({
 
   durationClass: "radio1",
 
+  rangeClass: computed(
+    "emberFlowplayer.nowPlaying.stationClass.[]",
+    function() {
+      return this.emberFlowplayer.nowPlaying.stationClass;
+    }
+  ),
+
   didInsertElement() {
     var rangeSlider = document.getElementById("ember-flowplayer-liverange");
-
+    console.log(this.emberFlowplayer.nowPlaying.duration);
     noUiSlider.create(rangeSlider, {
       start: [this.timeLeft],
       value: [this.timeLeft],
@@ -43,13 +51,19 @@ export default Component.extend({
     this.set("ready", true);
     rangeSlider.setAttribute("disabled", true);
     //hide the auld handle
-    document.getElementsByClassName("noUi-handle")[0].style.visibility = "hidden";
-    document.getElementsByClassName("noUi-connect")[0].classList.add(this.durationClass);
+    document.getElementsByClassName("noUi-handle")[0].style.visibility =
+      "hidden";
+    document
+      .getElementsByClassName("noUi-connect")[0]
+      .classList.add(this.durationClass);
   },
 
   updateRange: task(function*() {
     while (true) {
-      let toTheEnd = moment(moment()).diff(moment(this.emberFlowplayer.nowPlaying.start), "seconds");
+      let toTheEnd = moment(moment()).diff(
+        moment(this.emberFlowplayer.nowPlaying.start),
+        "seconds"
+      );
       this.emberFlowplayer.setLiveProgrammeTimeLeft(toTheEnd);
       this.set("timeLeft", toTheEnd);
 

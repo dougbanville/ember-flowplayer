@@ -1,95 +1,99 @@
-<AtInternet />
-<style>
-  .fp-player {
-    display: none;
-  }
-
-  .fp-ui {
-    display: none;
-  }
-</style>
-{{#if error}}
-  <div
-    style="height:100px; position:absolute; z-index:100; background:rgba(0,0,0,0.4); width:100%; display:flex; align-items:center;">
-    <div class="grid-container">
-      <div class="grid-x">
-        <button class="button" {{ action "reloadAfterError"}}>{{errorMessage}} Reload</button>
-      </div>
-    </div>
-  </div>
-{{/if}}
-
 <div style="height:0px;">
   <div id="ember-flowplayer"></div>
 </div>
-<div class="grid-container rte-radioplayer">
-  <audio-player aria-label="Audio Player" id="ember89" class="ember-view">
-    <div class="rte-radioplayer">
-      <div class="grid-x">
-        <div class="small-3 medium-2 cell">
-          {{#if emberFlowplayer.isPlaying}}
-            <button tabindex="1" id="pause"
-              class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
-              {{action "togglePlayer" "pause"}} label="Pause">
-              <i class="icon-RP-Webfont_Pause"></i>
-            </button>
-          {{else}}
-            <button tabindex="1" id="play"
-              class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
-              {{action "togglePlayer" "play"}} label="Play">
-              <i class="icon-RP-Webfont_Play"></i>
-            </button>
-          {{/if}}
-        </div>
-        <div class="small-7 medium-8 cell">
-          <a href="#/radio1/11033283" id="ember859" class="active ember-view">
-            {{#if emberFlowplayer.nowPlaying }}
-              <h4 class="hoverUl">
-                {{emberFlowplayer.nowPlaying.title}}</h4>
-            {{else}}
-              <h4 class="hoverUl">{{ yield }}</h4>
-            {{/if}}
-          </a>
-          {{#if emberFlowplayer.changeSrc}}
-            Loading
-          {{else}}
-            {{#if emberFlowplayer.isLive}}
-              <EmberFlowplayerLiveRange />
-            {{else}}
-              {{#if emberFlowplayer.duration}}
-                <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}}
-                  @live={{emberFlowplayer.isLive}} />
-              {{/if}}
+{{#if emberFlowplayer.ready }}
 
-            {{/if}}
-          {{/if}}
+  <AtInternet />
+  <style>
+    .fp-player {
+      display: none;
+    }
 
-
-
-          <div class="duration_information">
-            <EmberFlowplayerTime @duration={{emberFlowplayer.currentTime}} />
-            {{#if emberFlowplayer.isLive}}
-              <EmberFlowplayerTime @duration={{ emberFlowplayer.nowPlaying.duration }} class="float-right" />
-              {{timeLeft}} Started {{emberFlowplayer.liveProgrammeTimeLeft}} ago
-            {{else}}
-              <EmberFlowplayerTime @duration={{emberFlowplayer.duration}} class="float-right" />
-            {{/if}}
-          </div>
-
-        </div>
-        <div class="small-2 medium-1  cell volume-cell">
-          <button class="mute float-right transparent" {{action "mute"}}>
-            <i class="icon-RP-Webfont_Volume"></i>
-          </button>
-        </div>
-        <div class="medium-1 hide-for-small-only cell">
-          <div class="volume">
-            <EmberFlowplayerVolumerange @value=1 />
-          </div>
-
+    .fp-ui {
+      display: none;
+    }
+  </style>
+  {{#if error}}
+    <div
+      style="height:100px; position:absolute; z-index:100; background:rgba(0,0,0,0.4); width:100%; display:flex; align-items:center;">
+      <div class="grid-container">
+        <div class="grid-x">
+          <button class="button" {{ action "reloadAfterError"}}>{{errorMessage}} Reload</button>
         </div>
       </div>
-
     </div>
-  </audio-player>
-</div>
+  {{/if}}
+  <div class="grid-container rte-radioplayer">
+    <audio-player aria-label="Audio Player" id="ember89" class="ember-view">
+      <div class="rte-radioplayer">
+        <div class="grid-x">
+          <div class="small-3 medium-2 cell">
+            {{#if emberFlowplayer.isPlaying}}
+              <button tabindex="1" id="pause"
+                class="button transparent playButton {{safe-string emberFlowplayer.nowPlaying.stationClass}}"
+                {{action "togglePlayer" "pause"}} label="Pause">
+                <i class="icon-RP-Webfont_Pause"></i>
+              </button>
+            {{else}}
+              <button tabindex="1" id="play"
+                class="button transparent playButton {{safe-string emberFlowplayer.nowPlaying.stationClass}}"
+                {{action "togglePlayer" "play"}} label="Play">
+                <i class="icon-RP-Webfont_Play"></i>
+              </button>
+            {{/if}}
+          </div>
+          <div class="small-7 medium-8 cell">
+            <a href="#/radio1/11033283" id="ember859" class="active ember-view">
+              {{#if emberFlowplayer.nowPlaying }}
+                <h4 class="hoverUl">
+                  {{emberFlowplayer.nowPlaying.title}} {{emberFlowplayer.nowPlaying.duration}}
+                  {{emberFlowplayer.nowPlaying.id}}
+                </h4>
+              {{else}}
+                <h4 class="hoverUl">{{ yield }}</h4>
+              {{/if}}
+            </a>
+            {{#if emberFlowplayer.changeSrc}}
+              Loading
+            {{else}}
+              {{#if emberFlowplayer.isLive}}
+                <EmberFlowplayerLiveRange @durationClass={{safe-string emberFlowplayer.nowPlaying.stationClass}} />
+              {{else}}
+                {{#if emberFlowplayer.duration}}
+                  <EmberFlowplayerRange @max={{emberFlowplayer.duration}} @min=0 @value={{emberFlowplayer.currentTime}}
+                    @live={{emberFlowplayer.isLive}} />
+                {{/if}}
+
+              {{/if}}
+            {{/if}}
+
+
+
+            <div class="duration_information">
+              <EmberFlowplayerTime @duration={{emberFlowplayer.currentTime}} />
+              {{#if emberFlowplayer.isLive}}
+                <EmberFlowplayerTime @duration={{ emberFlowplayer.nowPlaying.duration }} class="float-right" />
+                {{timeLeft}} Started {{emberFlowplayer.liveProgrammeTimeLeft}} ago
+              {{else}}
+                <EmberFlowplayerTime @duration={{emberFlowplayer.duration}} class="float-right" />
+              {{/if}}
+            </div>
+
+          </div>
+          <div class="small-2 medium-1  cell volume-cell">
+            <button class="mute float-right transparent" {{action "mute"}}>
+              <i class="icon-RP-Webfont_Volume"></i>
+            </button>
+          </div>
+          <div class="medium-1 hide-for-small-only cell">
+            <div class="volume">
+              <EmberFlowplayerVolumerange @value=1 />
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </audio-player>
+  </div>
+{{/if}}
