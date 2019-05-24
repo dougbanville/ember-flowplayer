@@ -27,7 +27,7 @@ export default Component.extend({
     });
     this.emberFlowplayer.player.on("progress", (e, api) => {
       if (!this.sliding) {
-        rangeSlider.noUiSlider.set(api.video.time);
+        if (api.video.time) rangeSlider.noUiSlider.set(api.video.time);
       }
     });
     rangeSlider.noUiSlider.on("slide", () => {

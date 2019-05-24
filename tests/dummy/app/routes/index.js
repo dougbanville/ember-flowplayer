@@ -15,6 +15,7 @@ export default Route.extend({
         return response.json();
       })
       .then(function(json) {
+        console.log(json.duration);
         return json.shows;
       })
       .catch(function(ex) {

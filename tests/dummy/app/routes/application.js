@@ -21,6 +21,7 @@ export default Route.extend({
         json[0].title = json[0].fields.progname;
         json[0].start = json[0].fields.progdate;
         json[0].duration = json[0].fields.duration / 1000;
+        json[0].audioUrl = `https://cdn.rasset.ie/hls-radio/ieradio1/playlist.m3u8`;
         this.emberFlowplayer.setNowPlaying(json[0]);
         this.emberFlowplayer.setReady();
         return json[0];
@@ -29,6 +30,7 @@ export default Route.extend({
         console.log("parsing failed", ex);
       });
   },
+
   actions: {
     reloadRoute() {
       this.refresh();

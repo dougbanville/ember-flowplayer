@@ -82,22 +82,24 @@ export default Component.extend(EKMixin, {
   didInsertElement() {
     let audio = [
       // native HLS support accepts icecast source
-      { type: this.get("type"), src: this.get("source") }
+      { type: this.get("type"), src: this.emberFlowplayer.nowPlaying.audioUrl }
     ];
     this.set("audio", audio);
-    this.emberFlowplayer.setLive(this.audioId);
+    console.log(this.audio);
+    //this.emberFlowplayer.setLive(this.EmberFlowplayer.nowPlaying.audioId);
 
     let container = document.getElementById("ember-flowplayer");
 
     //progress.classList.add("mystyle");
-
+    console.log(this.source);
     let fp = flowplayer(container, {
       splash: false,
       audioOnly: true,
       autoplay: false,
       live: true,
       clip: {
-        sources: audio
+        sources: audio,
+        autoplay: false
       }
     })
       .on("progress.android", function(e) {
