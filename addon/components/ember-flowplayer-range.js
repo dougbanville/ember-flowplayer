@@ -25,6 +25,9 @@ export default Component.extend({
         max: [this.max]
       }
     });
+    document
+      .getElementsByClassName("noUi-connect")[0]
+      .classList.add(this.emberFlowplayer.nowPlaying.stationClass);
     this.emberFlowplayer.player.on("progress", (e, api) => {
       if (!this.sliding) {
         if (api.video.time) rangeSlider.noUiSlider.set(api.video.time);

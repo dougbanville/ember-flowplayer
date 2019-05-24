@@ -29,13 +29,13 @@
         <div class="small-3 medium-2 cell">
           {{#if emberFlowplayer.isPlaying}}
             <button tabindex="1" id="pause"
-              class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
+              class="button transparent playButton {{safe-string emberFlowplayer.nowPlaying.stationClass}}"
               {{action "togglePlayer" "pause"}} label="Pause">
               <i class="icon-RP-Webfont_Pause"></i>
             </button>
           {{else}}
             <button tabindex="1" id="play"
-              class="button transparent playButton {{safe-string player.nowPlaying.lastObject.stationClass}}"
+              class="button transparent playButton {{safe-string emberFlowplayer.nowPlaying.stationClass}}"
               {{action "togglePlayer" "play"}} label="Play">
               <i class="icon-RP-Webfont_Play"></i>
             </button>
@@ -84,7 +84,9 @@
         </div>
         <div class="medium-1 hide-for-small-only cell">
           <div class="volume">
-            <EmberFlowplayerVolumerange @value=1 />
+            {{#if emberFlowplayer.duration }}
+              <EmberFlowplayerVolumerange @value=1 />
+            {{/if}}
           </div>
 
         </div>

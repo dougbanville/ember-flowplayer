@@ -43,13 +43,19 @@ export default Component.extend({
     this.set("ready", true);
     rangeSlider.setAttribute("disabled", true);
     //hide the auld handle
-    document.getElementsByClassName("noUi-handle")[0].style.visibility = "hidden";
-    document.getElementsByClassName("noUi-connect")[0].classList.add(this.durationClass);
+    document.getElementsByClassName("noUi-handle")[0].style.visibility =
+      "hidden";
+    document
+      .getElementsByClassName("noUi-connect")[0]
+      .classList.add(this.emberFlowplayer.nowPlaying.stationClass);
   },
 
   updateRange: task(function*() {
     while (true) {
-      let toTheEnd = moment(moment()).diff(moment(this.emberFlowplayer.nowPlaying.start), "seconds");
+      let toTheEnd = moment(moment()).diff(
+        moment(this.emberFlowplayer.nowPlaying.start),
+        "seconds"
+      );
       this.emberFlowplayer.setLiveProgrammeTimeLeft(toTheEnd);
       this.set("timeLeft", toTheEnd);
 

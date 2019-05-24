@@ -8,12 +8,12 @@
     {{/if}}
 {{else}}
     {{#if isPlaying}}
-        <EmberFlowplayerRoundButton class="circular_button button radio1 mobile_list_button"
+        <EmberFlowplayerRoundButton class="circular_button button {{safe-string stationClass}} mobile_list_button"
             onclick={{action "pause" model}}>
-            <i class="icon-RP-Webfont_Pause"></i>
+            <i class=" icon-RP-Webfont_Pause"></i>
         </EmberFlowplayerRoundButton>
     {{else}}
-        <EmberFlowplayerRoundButton class="circular_button button radio1 mobile_list_button"
+        <EmberFlowplayerRoundButton class="circular_button button {{safe-string stationClass}} mobile_list_button"
             onclick={{action "play" model}}>
             <i class="icon-RP-Webfont_Play"></i>
         </EmberFlowplayerRoundButton>

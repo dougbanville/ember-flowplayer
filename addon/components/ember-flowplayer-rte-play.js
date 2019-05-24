@@ -18,7 +18,10 @@ export default Component.extend({
   }),
 
   isPlaying: computed("emberFlowplayer.{isPlaying.[],audioId.[]}", function() {
-    if (this.emberFlowplayer.isPlaying && this.emberFlowplayer.audioId == this.audioId) {
+    if (
+      this.emberFlowplayer.isPlaying &&
+      this.emberFlowplayer.audioId == this.audioId
+    ) {
       return true;
     }
   }),
@@ -32,7 +35,9 @@ export default Component.extend({
         if (this.isInPlayer) {
           this.emberFlowplayer.player.toggle();
         } else {
-          let url = `https://feeds.rasset.ie/rteavgen/getplaylist/?format=jsonp&id=${this.audioId}`;
+          let url = `https://feeds.rasset.ie/rteavgen/getplaylist/?format=jsonp&id=${
+            this.audioId
+          }`;
           fetchJsonp(url, {
             jsonpCallbackFunction: "html5player"
           })
@@ -41,7 +46,9 @@ export default Component.extend({
             })
             .then(json => {
               //console.dir(json.shows[0]["media:group"][0]);
-              let hlsUrl = json.shows[0]["media:group"][0].hls_server + json.shows[0]["media:group"][0].hls_url;
+              let hlsUrl =
+                json.shows[0]["media:group"][0].hls_server +
+                json.shows[0]["media:group"][0].hls_url;
               this.set("hlsUrl", hlsUrl);
               this.emberFlowplayer.change(true);
               let audio = [{ type: this.type, src: this.hlsUrl }];

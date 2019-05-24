@@ -40,5 +40,9 @@ export default Component.extend({
       this.emberFlowplayer.player.volume(volume);
       this.set("sliding", false);
     });
+
+    document
+      .getElementsByClassName("noUi-connect")[1]
+      .classList.add(this.emberFlowplayer.nowPlaying.stationClass);
   }
 });
