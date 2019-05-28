@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import layout from "../templates/components/ember-flowplayer-range";
 import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 import noUiSlider from "nouislider";
 
 export default Component.extend({
@@ -11,6 +12,10 @@ export default Component.extend({
   elementId: "ember-flowplayer-player-range",
 
   emberFlowplayer: service(),
+
+  nowPlayingClass: computed("emberFlowplayer.nowPlaying.[]", function() {
+    return this.emberFlowplayer.nowPlaying.stationClass;
+  }),
 
   didInsertElement() {
     var rangeSlider = document.getElementById("ember-flowplayer-player-range");
@@ -27,7 +32,7 @@ export default Component.extend({
     });
     document
       .getElementsByClassName("noUi-connect")[0]
-      .classList.add(this.emberFlowplayer.nowPlaying.stationClass);
+      .classList.add(this.nowPlayingClass);
     this.emberFlowplayer.player.on("progress", (e, api) => {
       if (!this.sliding) {
         if (api.video.time) rangeSlider.noUiSlider.set(api.video.time);
