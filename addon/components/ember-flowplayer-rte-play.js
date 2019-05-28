@@ -37,7 +37,7 @@ export default Component.extend({
         } else {
           let url = `https://feeds.rasset.ie/rteavgen/getplaylist/?format=jsonp&id=${
             this.audioId
-          }`;
+          }&callback=html5player`;
           fetchJsonp(url, {
             jsonpCallbackFunction: "html5player"
           })
