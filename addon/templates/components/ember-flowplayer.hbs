@@ -84,8 +84,12 @@
         </div>
         <div class="medium-1 hide-for-small-only cell">
           <div class="volume">
-            {{#if emberFlowplayer.duration }}
-              <EmberFlowplayerVolumerange @value=1 />
+            {{#if emberFlowplayer.changeSrc}}
+
+            {{else}}
+              {{#if emberFlowplayer.duration }}
+                <EmberFlowplayerVolumerange @value=1 />
+              {{/if}}
             {{/if}}
           </div>
 
