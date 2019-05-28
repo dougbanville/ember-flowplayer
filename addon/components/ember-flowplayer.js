@@ -76,7 +76,6 @@ export default Component.extend(EKMixin, {
   didReceiveAttrs() {
     this.set("error", false);
     this.set("ready", true);
-    this.emberFlowplayer.change(false);
   },
 
   didInsertElement() {
