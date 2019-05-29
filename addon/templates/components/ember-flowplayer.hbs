@@ -38,14 +38,26 @@
           {{/if}}
         </div>
         <div class="small-7 medium-8 cell">
-          <a href="#/radio1/11033283" id="ember859" class="active ember-view">
-            {{#if emberFlowplayer.nowPlaying }}
-              <h4 class="hoverUl">
-                {{emberFlowplayer.nowPlaying.title}}</h4>
-            {{else}}
-              <h4 class="hoverUl">{{ yield }}</h4>
-            {{/if}}
-          </a>
+          {{#if emberFlowplayer.isLive}}
+            {{#link-to "station.index" emberFlowplayer.nowPlaying.stationSlug}}
+              {{#if emberFlowplayer.nowPlaying }}
+                <h4 class="hoverUl">
+                  {{{emberFlowplayer.nowPlaying.title}}}</h4>
+              {{else}}
+                <h4 class="hoverUl">{{ yield }}</h4>
+              {{/if}}
+            {{/link-to}}
+          {{else}}
+            {{#link-to "station.playback" emberFlowplayer.nowPlaying.stationSlug emberFlowplayer.nowPlaying.id}}
+              {{#if emberFlowplayer.nowPlaying }}
+                <h4 class="hoverUl">
+                  {{{emberFlowplayer.nowPlaying.title}}}</h4>
+              {{else}}
+                <h4 class="hoverUl">{{ yield }}</h4>
+              {{/if}}
+            {{/link-to}}
+          {{/if}}
+
           {{#if emberFlowplayer.changeSrc}}
             Loading
           {{else}}
