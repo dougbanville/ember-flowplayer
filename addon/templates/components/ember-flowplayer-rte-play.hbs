@@ -1,9 +1,11 @@
 {{#if pillButton}}
     {{#if isPlaying}}
-        <EmberFlowplayerPillButton onclick={{action "pause" model}}><i class="icon-RP-Webfont_Pause"></i>Pause
+        <EmberFlowplayerPillButton onclick={{action "pause" model}} @stationClass={{stationClass}}><i
+                class="icon-RP-Webfont_Pause"></i>Pause
         </EmberFlowplayerPillButton>
     {{else}}
-        <EmberFlowplayerPillButton onclick={{action "play" model}}><i class="icon-RP-Webfont_Play"></i>{{yield}}
+        <EmberFlowplayerPillButton onclick={{action "play" model}} @stationClass={{stationClass}}><i
+                class="icon-RP-Webfont_Play"></i>{{yield}}
         </EmberFlowplayerPillButton>
     {{/if}}
 {{else}}
