@@ -65,8 +65,8 @@
               <EmberFlowplayerLiveRange />
             {{else}}
               {{#if emberFlowplayer.duration }}
-                <EmberFlowplayerRange @max={{emberFlowplayer.nowPlaying.duration }} @min=0
-                  @value={{emberFlowplayer.currentTime}} @live={{emberFlowplayer.isLive}} />
+                <EmberFlowplayerRange @max={{emberFlowplayer.duration }} @min=0 @value={{emberFlowplayer.currentTime}}
+                  @live={{emberFlowplayer.isLive}} />
               {{/if}}
 
             {{/if}}
@@ -80,7 +80,7 @@
               <EmberFlowplayerTime @duration={{ emberFlowplayer.nowPlaying.duration }} class="float-right" />
               {{timeLeft}} Started {{emberFlowplayer.liveProgrammeTimeLeft}} ago
             {{else}}
-              <EmberFlowplayerTime @duration={{emberFlowplayer.nowPlaying.duration}} class="float-right" />
+              <EmberFlowplayerTime @duration={{emberFlowplayer.duration}} class="float-right" />
             {{/if}}
           </div>
 
